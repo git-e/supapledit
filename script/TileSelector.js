@@ -1,7 +1,15 @@
-class TileSelector extends HTMLElement {
+import {Tile} from './Tile.js'
+
+class PenSelectEvent extends Event {
+  constructor(type) {
+    super('pen-select', {bubbles: true});
+    this.pen = type;
+  }
+}
+
+export default class TileSelector extends HTMLElement {
   _tileSets;
-  _editor;
-  _currentTile;
+  _currentPen;
 
   constructor() {
     super();
@@ -12,11 +20,6 @@ class TileSelector extends HTMLElement {
       this._tileSets = {};
       this.querySelectorAll("tile-set").forEach(ts => this._tileSets[ts.key] = ts);
     });
-    for (let p = this; p; p = p.parentElement) {
-      if (p instanceof LevelEditor) {
-        this._editor = p;
-      }
-    }
   }
 
   nextSet(key) {
@@ -33,7 +36,7 @@ class TileSelector extends HTMLElement {
     }
     this._currentTile = tile;
     this._currentTile.setAttribute("active", "")
-    this._editor.currentTileType = tile ? tile.type : null;
+    this.dispatchEvent(new PenSelectEvent(tile ? tile.type : null));
   }
 }
 customElements.define('tile-selector', TileSelector, { });

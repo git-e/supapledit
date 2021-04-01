@@ -1,4 +1,4 @@
-class Tile extends HTMLElement {
+export class Tile extends HTMLElement {
   static get observedAttributes() {
     return ['type'];
   }
@@ -30,10 +30,22 @@ class Tile extends HTMLElement {
     }
   }
 }
+customElements.define('layer-tile', Tile, { });
 
-class TileLayer extends HTMLElement {
+export class TileLayer extends HTMLElement {
+
   get tiles() {
     return this.children;
+  }
+
+  mergeInto(target) {
+    let targetTiles = target.tiles;
+    [].forEach.call(this.tiles, (tile, i) => {
+      if ( tile.type ) {
+        targetTiles[i].type = tile.type;
+      }
+      tile.type = null;
+    })
   }
 
   fromArray(tiles) {

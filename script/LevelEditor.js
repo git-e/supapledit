@@ -1,27 +1,20 @@
-class LevelEditor extends HTMLElement {
+import selectedTileType from "./SelectedTileType.js";
+import {Tile} from "./Tile.js";
+import InfoBox from "./InfoBox.js";
+import LevelLayer from "./LevelLayer.js";
+import EditLayer from "./EditLayer.js";
+import SelectionLayer from "./SelectionLayer.js";
+import TileSelector from "./TileSelector.js";
+import Port from "./Port.js";
+
+export default class LevelEditor extends HTMLElement {
   _currentTile = null;
   _layers;
   _infoBox;
   _ports;
   _tileSelector;
   _selectedTile;
-
-  get currentTile() {
-    return this._currentTile;
-  }
-  set currentTile(tile) {
-    if ( this._currentTile !== tile ) {
-      this._currentTile = tile;
-      this._infoBox.showTilePosition(tile.pos);
-    }
-  }
-
-  get currentTileType() {
-    return this._selectedTile.type;
-  }
-  set currentTileType(type) {
-    this._selectedTile.type = type;
-  }
+  _positionUpdateTimeout = null;
 
   constructor() {
     super();
@@ -34,6 +27,14 @@ class LevelEditor extends HTMLElement {
       this._ports = this.querySelector("level-ports").children;
       this._tileSelector = this.querySelector('tile-selector');
       this._selectedTile = this.querySelector("selected-tile");
+    });
+    this.addEventListener('pen-select', (event) => {
+      this._selectedTile.type = event.pen;
+      this.querySelector('edit-layer').pen = event.pen;
+    });
+    this.addEventListener('tile-enter', (event) => {
+      clearTimeout(this._positionUpdateTimeout);
+      this._positionUpdateTimeout = setTimeout(()=>this._infoBox.showTilePosition(event.tile.pos));
     });
     document.body.addEventListener('keydown', (event) => {
       if (event.target === document.body) {
@@ -164,170 +165,13 @@ class LevelLayers extends HTMLElement {
     this.addEventListener('pointerdown', (event) => {
       document.activeElement.blur();
     });
-    this.addEventListener('pointerup', (event) => {
-      let activeTiles = this.activeLayer.tiles;
-      [].forEach.call(this.editLayer.tiles, (tile, i) => {
-        if ( tile.type ) {
-          activeTiles[i].type = tile.type;
-        }
-        tile.type = null;
-      })
+    this.addEventListener('edit-ready', (event) => {
+      event.layer.mergeInto(this.activeLayer);
       window.history.pushState(this.activeLayer.toRleArray(), null);
     });
   }
 }
 customElements.define('level-layers', LevelLayers, { });
-
-class LevelLayer extends TileLayer {
-  get tiles() {
-    return this.children;
-  }
-
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    this.innerHTML = [
-      "☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒                                                          ☒",
-      "☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒☒",
-    ].map(line => [].map.call(line, c => {
-      switch (c) {
-      case '☒': return '<layer-tile type="06"></layer-tile>';
-      default: return '<layer-tile type="00"></layer-tile>';
-      }
-    })).flat().join('')
-  }
-}
-customElements.define('level-layer', LevelLayer, { });
-
-class SelectionLayer extends TileLayer {
-  get tiles() {
-    return this.children;
-  }
-
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    let tiles = [];
-    tiles.length = 1440;
-    this.innerHTML = tiles.fill('<layer-tile></layer-tile>').join('');
-  }
-}
-customElements.define('selection-layer', SelectionLayer, { });
-
-class EditLayer extends TileLayer {
-
-  get tiles() {
-    return this.children;
-  }
-
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    let tiles = [];
-    tiles.length = 1440;
-    this.innerHTML = tiles.fill('<edit-tile></edit-tile>').join('');
-  }
-}
-customElements.define('edit-layer', EditLayer, { });
-
-class LayerTile extends Tile {
-
-  _editor;
-
-  constructor() {
-    super();
-  }
-}
-customElements.define('layer-tile', LayerTile, { });
-
-class EditTile extends Tile {
-
-  _editor;
-  _levelLayer;
-  _selectionLayer;
-
-  constructor() {
-    super();
-  }
-
-  get pos() {
-    return Number.parseInt(this.getAttribute("pos"));
-  }
-
-  connectedCallback() {
-    const pos = [].indexOf.call(this.parentElement.children, this);
-    this.setAttribute('pos', pos);
-    for (let p = this; p; p = p.parentElement) {
-      if (p instanceof LevelEditor) {
-        this._editor = p;
-      }
-    }
-    this._levelLayer = this._editor.querySelector('level-layer');
-    this._selectionLayer = this._editor.querySelector('selection-layer');
-    this.addEventListener('pointerdown', (event) => {
-      event.preventDefault();
-      if ( event.ctrlKey ) {
-        if (event.buttons & 1) {
-          if (event.altKey) {
-            this._selectionLayer.tiles[this.pos].type = null;
-          } else {
-            this._selectionLayer.tiles[this.pos].type = this._levelLayer.tiles[this.pos].type;
-          }
-        }
-      } else {
-        if ( event.buttons & 1 && this._editor.currentTileType ) {
-          this.type = this._editor.currentTileType;
-        }
-        this._editor.currentTile = this;
-      }
-    });
-    this.addEventListener("pointerenter", (event) => {
-      if ( event.ctrlKey ) {
-        if (event.buttons & 1) {
-          if (event.altKey) {
-            this._selectionLayer.tiles[this.pos].type = null;
-          } else {
-            this._selectionLayer.tiles[this.pos].type = this._levelLayer.tiles[this.pos].type;
-          }
-        }
-      } else {
-        if ( event.buttons & 1 && this._editor.currentTileType ) {
-          this.type = this._editor.currentTileType;
-        }
-      }
-      this._editor.currentTile = this;
-    });
-  }
-}
-customElements.define('edit-tile', EditTile, { });
 
 class SelectedTile extends Tile {
   constructor() {

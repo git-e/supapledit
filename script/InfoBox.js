@@ -1,4 +1,4 @@
-class InfoBox extends HTMLElement {
+export default class InfoBox extends HTMLElement {
 
   _levelnumber;
   _levelname;

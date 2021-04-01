@@ -1,4 +1,4 @@
-class Port extends HTMLElement {
+export default class Port extends HTMLElement {
 
   _pos;
   _gravity;
