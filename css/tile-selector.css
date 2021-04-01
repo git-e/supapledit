@@ -1,0 +1,29 @@
+tile-selector tile-set > h4 {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+tile-selector tile-set {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  white-space: pre;
+  line-height: 10px;
+  margin-bottom: 4px;
+}
+
+tile-selector tile-set tile-entry {
+  filter: grayscale(50%) brightness(0.666);
+  height: 32px;
+  width: 16px;
+  padding: 8px 0;
+  transition-property: width, height, padding;
+  transition-duration: .05s;
+}
+
+tile-selector tile-set tile-entry[active] {
+  filter: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}

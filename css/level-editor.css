@@ -1,0 +1,78 @@
+@import "info-box.css";
+@import "tile.css";
+@import "tile-selector.css";
+@import "port.css";
+
+body {
+  padding: 20px;
+}
+
+level-editor {
+  display: grid;
+  white-space: nowrap;
+  grid-template-columns: 960px auto;
+  grid-template-rows: auto 384px 75px auto;
+  column-gap: 20px;
+}
+
+level-editor selected-tile {
+  grid-row-start: 1;
+  grid-column-start: 2;
+  height: 32px;
+  width: 32px;
+}
+
+level-editor tile-selector {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  grid-row-end: 6;
+}
+
+level-editor level-layers {
+  grid-row-start: 2;
+  grid-column-start: 1;
+}
+level-editor info-box {
+  grid-row-start: 3;
+  grid-column-start: 1;
+}
+level-editor level-ports {
+  grid-row-start: 4;
+  grid-column-start: 1;
+}
+level-editor [title="misc"] {
+  grid-row-start: 5;
+  grid-column-start: 1;
+  display: flex;
+  /* padding: 10px; */
+}
+level-editor [title="misc"] > section {
+  margin-right: 32px;
+}
+level-editor [title="misc"] input {
+  width: 18px;
+}
+level-editor [title="misc"] > section:first-child {
+  text-align: right;
+}
+
+selection-layer, level-layer, edit-layer {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  white-space: pre;
+  line-height: 10px;
+  width: 960px
+}
+
+level-layer > [type="03"] ~ [type="03"] {
+  filter: hue-rotate(200deg) brightness(1.8) contrast(2);
+}
+
+edit-layer > edit-tile {
+    background-color: rgba(31,31,31,.7);
+}
+
+edit-layer > edit-tile:hover {
+    background-color: transparent;
+}

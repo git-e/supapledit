@@ -1,0 +1,21 @@
+@import "reset.css";
+@import "level-editor.css";
+
+body { font-family: "Syne Mono"; background: #333; color: #c22; }
+
+input[type=text],
+input[type=number] {
+  font-family: "Syne Mono";
+  font-size: 1rem;
+  color: cornflowerblue;
+  vertical-align: baseline;
+  text-align: right;
+  padding: 0;
+  margin: 0;
+  height: 18px;
+  border-bottom: 1px solid gray;
+}
+
+input:invalid {
+  color: red;
+}

@@ -1,0 +1,41 @@
+level-ports {
+  display: flex;
+  width: 960px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  padding: 12px 0;
+}
+
+level-ports port-switch input[name="pos"] {
+  width: 36px;
+}
+
+level-ports port-switch input[type="checkbox"] {
+  appearance: none;
+  display: inline-block;
+  background-image: url(../tiles/1f.png);
+  width: 16px;
+  height: 16px;
+  vertical-align: baseline;
+  position: relative;
+  bottom: -2px;
+  margin-left: 2px;
+}
+
+level-ports port-switch input[type="checkbox"]:checked {
+  background-image: url(../tiles/1d.png);
+}
+
+level-ports {
+  margin-left: 0px;
+  overflow: hidden;
+}
+
+port-switch {
+  display: flex;
+  justify-content: space-evenly;
+  /* border-left: 1px solid gray; */
+  width: 20%;
+  padding: 4px 0;
+}

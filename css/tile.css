@@ -1,0 +1,8 @@
+selected-tile, tile-entry, edit-tile, layer-tile {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  background-size: cover;
+  background-clip: content-box;
+  background-origin: content-box;
+}

@@ -1,0 +1,59 @@
+info-box {
+  display: block;
+  width: 960px;
+  height: 75px;
+  position: relative;
+  background-image: url("../tiles/panel.png");
+  background-size: contain;
+}
+
+info-box input[type="number"],
+info-box input[type="text"],
+info-box label {
+  height: 24px;
+  text-align: center;
+  border: none;
+  background: transparent;
+  color: cornflowerblue;
+  font-family: inherit;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: bold;
+  vertical-align: bottom;
+  white-space: pre;
+  padding-top: 1px;
+}
+
+info-box input:invalid {
+  color: red;
+}
+
+info-box input[name="levelnumber"] { position: absolute; width: 75px; bottom: 9px; left: 45px }
+info-box input[name="levelname"] { position: absolute; width: 555px; bottom: 9px; left: 189px }
+info-box input[name="infotrons"] {position: absolute;width: 75px;bottom: 9px;right: 72px;}
+info-box input[name="levelnumber"],
+info-box input[name="levelname"],
+info-box input[name="infotrons"],
+info-box label[title="pos"], .foo {
+  letter-spacing: 4px;
+  padding-left: 4px;
+}
+
+info-box label[title="gravity"] { position: absolute; width: 51px; top: 9px; right: 360px }
+info-box label[title="freezez"] { position: absolute; width: 51px; top: 9px; right: 288px }
+info-box label[title="ports"] { position: absolute; width: 51px; top: 9px; right: 432px }
+info-box label[title="ports"] input { width: 38px; text-align: right; }
+info-box label[title="pos"] {position: absolute; width: 195px; top: 9px; left: 213px }
+info-box label input[type="checkbox"] {
+  appearance: none;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url(../tiles/1f.png);
+  position: relative;
+  vertical-align: unset;
+  margin: 0 2px;
+}
+info-box label input[type="checkbox"]:checked {
+  background-image: url(../tiles/1d.png);
+}
