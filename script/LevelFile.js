@@ -12,8 +12,11 @@ export default class LevelFile extends HTMLElement {
 
   connectedCallback() {
     this.addEventListener('click', event => {
-      if (event.target.name == 'save') {
+      if (event.target.name == 'save-dat') {
         this.dispatchEvent(new Event('save-levelset', {bubbles: true}))
+      }
+      if (event.target.name == 'save-lst') {
+        this.dispatchEvent(new Event('save-levellist', {bubbles: true}))
       }
     });
     this.addEventListener('change', event => {

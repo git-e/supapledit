@@ -7,7 +7,12 @@ level-file > label > input ~ span {
 level-file > label > input:invalid ~ span {
   color: yellow;
 }
-level-file [name="save"] {
+level-file [name="save-lst"] {
+  height: 16px;
+  width: 16px;
+  background-image: url(../tiles/0a.png);
+}
+level-file [name="save-dat"] {
   height: 16px;
   width: 16px;
   background-image: url(../tiles/12.png);

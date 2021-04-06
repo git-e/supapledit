@@ -36,6 +36,10 @@ export default class LevelEditor extends HTMLElement {
       this.synchronizeLevelList(this._levelList.selectedLevel);
       save(new Blob(this._levelList.saveToBytes(), {type: "application/binary"}), "LEVELS.DAT");
     });
+    this.addEventListener('save-levellist', event => {
+      this.synchronizeLevelList(this._levelList.selectedLevel);
+      save(new Blob(Array.from(this._levelList.entries, entry => Uint8Array.from(entry.label + '\n', c=>c.charCodeAt(0))), {type: "application/binary"}), "LEVEL.LST");
+    });
     this.addEventListener('level-select', event => {
       this.synchronizeLevelList(event.previousSelection);
       this._levelView.loadFromBytes(Uint8Array.from(atob(event.target.dataset.chunk), c => c.charCodeAt(0)), event.target.number);
