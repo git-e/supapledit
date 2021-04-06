@@ -1,3 +1,6 @@
+@import "level-file.css";
+@import "level-list.css";
+@import "tile-layers.css";
 @import "info-box.css";
 @import "tile.css";
 @import "tile-selector.css";
@@ -10,42 +13,31 @@ body {
 level-editor {
   display: grid;
   white-space: nowrap;
-  grid-template-columns: 960px auto;
-  grid-template-rows: auto 384px 75px auto;
+  grid-template-columns: auto auto auto 100fr;
+  grid-template-rows: auto auto auto auto 100fr;
   column-gap: 20px;
+  align-items: start;
 }
 
-level-editor selected-tile {
+level-editor > level-file {
+  grid-column-start: 1;
   grid-row-start: 1;
-  grid-column-start: 2;
-  height: 32px;
-  width: 32px;
+  margin-bottom: 20px;
 }
-
-level-editor tile-selector {
+level-editor > level-list {
+  grid-column-start: 1;
+  grid-row-start: 2;
+}
+level-editor > level-view {
   grid-column-start: 2;
   grid-row-start: 2;
-  grid-row-end: 6;
 }
 
-level-editor level-layers {
+level-editor > tile-selector {
+  grid-column-start: 3;
   grid-row-start: 2;
-  grid-column-start: 1;
 }
-level-editor info-box {
-  grid-row-start: 3;
-  grid-column-start: 1;
-}
-level-editor level-ports {
-  grid-row-start: 4;
-  grid-column-start: 1;
-}
-level-editor [title="misc"] {
-  grid-row-start: 5;
-  grid-column-start: 1;
-  display: flex;
-  /* padding: 10px; */
-}
+
 level-editor [title="misc"] > section {
   margin-right: 32px;
 }
@@ -56,21 +48,21 @@ level-editor [title="misc"] > section:first-child {
   text-align: right;
 }
 
-selection-layer, level-layer, edit-layer {
-  position: absolute;
+selection-layer, level-tiles, edit-layer {
   display: flex;
   flex-wrap: wrap;
   white-space: pre;
   line-height: 10px;
-  width: 960px
+  width: 960px;
 }
 
-level-layer > [type="03"] ~ [type="03"] {
+level-tiles > [type="03"] ~ [type="03"] {
   filter: hue-rotate(200deg) brightness(1.8) contrast(2);
+  z-index: -1;
 }
 
 edit-layer > edit-tile {
-    background-color: rgba(31,31,31,.6);
+    background-color: rgba(63,63,63,.7);
 }
 
 edit-layer > edit-tile:hover {

@@ -1,6 +1,6 @@
 import {Tile, TileLayer} from "./Tile.js";
 
-export default class LevelLayer extends TileLayer {
+export default class LevelTiles extends TileLayer {
   get tiles() {
     return this.children;
   }
@@ -43,4 +43,4 @@ export default class LevelLayer extends TileLayer {
     })).flat().join('')
   }
 }
-customElements.define('level-layer', LevelLayer, { });
+customElements.define('level-tiles', LevelTiles, { });

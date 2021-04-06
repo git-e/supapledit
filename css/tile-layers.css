@@ -1,0 +1,10 @@
+tile-layers {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}
+
+tile-layers > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}

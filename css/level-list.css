@@ -1,0 +1,12 @@
+level-list {
+  display: flex;
+  flex-direction: column;
+}
+
+level-entry {
+  cursor: default;
+}
+
+level-entry[selected] {
+  color: cornflowerblue;
+}

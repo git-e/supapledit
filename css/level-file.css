@@ -1,0 +1,19 @@
+level-file > label > input {
+  display: none;
+}
+level-file > label > input ~ span {
+  color: red;
+}
+level-file > label > input:invalid ~ span {
+  color: yellow;
+}
+level-file [name="save"] {
+  height: 16px;
+  width: 16px;
+  background-image: url(../tiles/12.png);
+}
+level-file [name="load"] {
+  height: 16px;
+  width: 16px;
+  content: url(../tiles/13.png);
+}

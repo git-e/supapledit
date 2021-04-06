@@ -6,9 +6,129 @@
   <script type="module" src="script/LevelEditor.js"></script>
 </head>
 <body>
-<img src="tiles/13.png" onclick="document.querySelector('level-editor').load()"><img src="tiles/12.png" onclick="document.querySelector('level-editor').save    ()">
 <level-editor>
-  <h1>NEW LEVEL</h1><selected-tile></selected-tile>
+  <level-file>
+    <button name="save"></button>
+    <label><img name="load"> <input type="file" name="file" required><span>select levelset</span></label>
+  </level-file>
+  <level-list>
+    <level-entry selected data-number="001" data-chunk="
+      BgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG
+      BgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYG
+      AAAAAAAgLS0tLS0tIE5FVyBMRVZFTCAtLS0tLS0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">001 ------ NEW LEVEL ------</level-entry>
+  </level-list>
+  <level-view>
+    <tile-layers>
+      <level-tiles></level-tiles>
+      <selection-layer></selection-layer>
+      <edit-layer></edit-layer>
+    </tile-layers>
+    <info-box>
+      <input name="levelnumber" min=1 max=111 type=number value="001">
+      <input name="levelname" maxlength=23 type=text value="------ NEW LEVEL ------">
+      <input name="infotrons" min=0 max=255 type="number" value="0">
+      <label title="gravity">G <input name="gravity" type="checkbox"></label>
+      <label title="freezez">F <input name="freezez" type="checkbox"></label>
+      <label title="ports">P<input name="ports" type="number" min=0 max=10 value="0"></label>
+      <label title="pos"></label>
+    </info-box>
+    <port-list>
+      <port-switch number="0">
+        <label title="pos">P0:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+      <port-switch number="1">
+        <label title="pos">P1:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+      <port-switch number="2">
+        <label title="pos">P2:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+      <port-switch number="3">
+        <label title="pos">P3:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+      <port-switch number="4">
+        <label title="pos">P4:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+      <port-switch number="5">
+        <label title="pos">P5:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+      <port-switch number="6">
+        <label title="pos">P6:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+      <port-switch number="7">
+        <label title="pos">P7:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+      <port-switch number="8">
+        <label title="pos">P8:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+      <port-switch number="9">
+        <label title="pos">P9:<input name="pos" type="number" min="0" max="1439"></label>
+        <label title="gravity">G<input name="gravity" type="checkbox"></label>
+        <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
+        <label title="freezee">FE<input name="freezee" type="checkbox"></label>
+      </port-switch>
+    </port-list>
+    <div title="misc">
+      <section>
+        <h4>Version</h4>
+        <input name="version" type="number" min="0" max="225"></label>
+      </section>
+      <section>
+        <h4>Viewport</h4>
+        <label title="x">X:<input name="viewport.x" type="number" min="0" max="40"></label>
+        <label title="y">Y:<input name="viewport.y" type="number" min="0" max="40"></label>
+      </section>
+    </div>
+  </level-view>
   <tile-selector>
     <tile-set key="1">
       <h4>1 - space</h4>
@@ -81,93 +201,6 @@
       <tile-entry type="07"></tile-entry>
     </tile-set>
   </tile-selector>
-  <level-layers>
-    <level-layer></level-layer>
-    <selection-layer></selection-layer>
-    <edit-layer></edit-layer>
-  </level-layers>
-  <info-box>
-    <input name="levelnumber" min=1 max=111 type=number value="000">
-    <input name="levelname" maxlength=23 type=text value="------ NEW LEVEL ------">
-    <input name="infotrons" min=0 max=255 type="number" value="0">
-    <label title="gravity">G <input name="gravity" type="checkbox"></label>
-    <label title="freezez">F <input name="freezez" type="checkbox"></label>
-    <label title="ports">P<input name="ports" type="number" min=0 max=10 value="0"></label>
-    <label title="pos"></label>
-  </info-box>
-  <level-ports>
-    <port-switch number="0">
-      <label title="pos">P0:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-    <port-switch number="1">
-      <label title="pos">P1:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-    <port-switch number="2">
-      <label title="pos">P2:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-    <port-switch number="3">
-      <label title="pos">P3:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-    <port-switch number="4">
-      <label title="pos">P4:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-    <port-switch number="5">
-      <label title="pos">P5:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-    <port-switch number="6">
-      <label title="pos">P6:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-    <port-switch number="7">
-      <label title="pos">P7:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-    <port-switch number="8">
-      <label title="pos">P8:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-    <port-switch number="9">
-      <label title="pos">P9:<input name="pos" type="number" min="0" max="1439"></label>
-      <label title="gravity">G<input name="gravity" type="checkbox"></label>
-      <label title="freezez">FZ<input name="freezez" type="checkbox"></label>
-      <label title="freezee">FE<input name="freezee" type="checkbox"></label>
-    </port-switch>
-  </level-ports>
-  <div title="misc">
-    <section>
-      <h4>Version</h4>
-      <input name="version" type="number" min="0" max="225"></label>
-    </section>
-    <section>
-      <h4>Viewport</h4>
-      <label title="x">X:<input name="viewport.x" type="number" min="0" max="40"></label>
-      <label title="y">Y:<input name="viewport.y" type="number" min="0" max="40"></label>
-    </section>
-  </div>
 </level-editor>
 </body>
 </html>
