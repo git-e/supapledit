@@ -1,3 +1,10 @@
+class LevelNameChangeEvent extends Event {
+  constructor(levelname) {
+    super('levelname-change', {bubbles: true});
+    this.levelname = levelname;
+  }
+}
+
 export default class InfoBox extends HTMLElement {
 
   _levelnumber;
@@ -19,9 +26,14 @@ export default class InfoBox extends HTMLElement {
     this._levelnumber.value = ('00' + number).substr(-3);
   }
 
-  get levelname() { return this._levelname.value; }
+  get levelname() {
+    return this._levelname.value || "-----------------------";
+  }
   set levelname(name) {
-    this._levelname.value = name;
+    const sanitizedName = name === null || name === undefined ? '' : Array.from(name.toString().toUpperCase()).map(c => c.charCodeAt(0) >= 0x20 && c.charCodeAt(0) <= 0x5f ? c : '#' ).join('');
+    const paddedName =  `------------${sanitizedName.length < 20 ? ` ${sanitizedName} ` : sanitizedName}------------`;
+    this._levelname.value = paddedName.substring((paddedName.length - 22) / 2 | 0, ((paddedName.length - 22) / 2 | 0) + 23);
+    this.dispatchEvent(new LevelNameChangeEvent(this._levelname.value));
   }
 
   get infotrons() { return Number.parseInt(this._infotrons.value); }
@@ -57,6 +69,8 @@ export default class InfoBox extends HTMLElement {
       this._freezez = this.querySelector('input[name="freezez"]');
       this._ports = this.querySelector('input[name="ports"]');
       this._pos = this.querySelector('label[title="pos"]');
+
+      this._levelname.addEventListener('change', event => { this.levelname = this._levelname.value; });
     });
   }
 }

@@ -17,8 +17,8 @@ level-file [name="save-dat"] {
   width: 16px;
   background-image: url(../tiles/12.png);
 }
-level-file [name="load"] {
+level-file [name="load-dat"] {
   height: 16px;
   width: 16px;
-  content: url(../tiles/13.png);
+  background-image: url(../tiles/13.png);
 }

@@ -2,3 +2,8 @@ level-view {
   display: flex;
   flex-direction: column;
 }
+
+level-view > [title=misc] {
+  display: flex;
+  flex-direction: row;
+}

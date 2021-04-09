@@ -15,6 +15,7 @@ export default class LevelEditor extends HTMLElement {
   _levelFile;
   _levelList;
   _levelView;
+  _tileSelector;
 
   constructor() {
     super();
@@ -22,6 +23,7 @@ export default class LevelEditor extends HTMLElement {
 
   connectedCallback() {
     setTimeout(() => {
+      this._levelFile = this.querySelector('level-file');
       this._levelList = this.querySelector('level-list');
       this._levelView = this.querySelector('level-view');
       this._tileSelector = this.querySelector('tile-selector');
@@ -30,15 +32,19 @@ export default class LevelEditor extends HTMLElement {
       const file = event.file;
       file.arrayBuffer().then(array => {
         this._levelList.loadFromBytes(new Uint8Array(array));
+        this._levelList.select(0);
       })
     });
     this.addEventListener('save-levelset', event => {
       this.synchronizeLevelList(this._levelList.selectedLevel);
-      save(new Blob(this._levelList.saveToBytes(), {type: "application/binary"}), "LEVELS.DAT");
+      save(new Blob(this._levelList.saveToBytes(), {type: "application/binary"}), this._levelFile.filename);
     });
     this.addEventListener('save-levellist', event => {
       this.synchronizeLevelList(this._levelList.selectedLevel);
-      save(new Blob(Array.from(this._levelList.entries, entry => Uint8Array.from(entry.label + '\n', c=>c.charCodeAt(0))), {type: "application/binary"}), "LEVEL.LST");
+      const parts = this._levelFile.filename.split('.', 2);
+      const name = parts[0].replace(/[sS]$/, '')
+      const ext = (parts[1] ? parts[1] : 'LST').replace(/[dD][aA][tT]/, 'LST').replace(/^[dD]/, 'L');
+      save(new Blob(Array.from(this._levelList.entries, entry => Uint8Array.from(entry.label + '\n', c=>c.charCodeAt(0))), {type: 'application/binary'}), `${name}.${ext}`);
     });
     this.addEventListener('level-select', event => {
       this.synchronizeLevelList(event.previousSelection);
@@ -54,22 +60,6 @@ export default class LevelEditor extends HTMLElement {
             this._tileSelector.prevSet(event.code.substr(-1));
           } else {
             this._tileSelector.nextSet(event.code.substr(-1));
-          }
-        }
-        if (event.code === "KeyV") {
-          this.querySelector('[title="misc"] input[name="viewport.x"]').value = Math.min(40, Math.max(0, (this._currentTile.pos % 60) - 9));
-          this.querySelector('[title="misc"] input[name="viewport.y"]').value = Math.min(12, Math.max(0, ((this._currentTile.pos / 60) | 0) - 6));
-        }
-        if (event.code === "KeyP") {
-          if (event.shiftKey) {
-            if ( this._infoBox.ports > 0 ) {
-              --this._infoBox.ports;
-            }
-          } else {
-            if ( this._infoBox.ports < 10 ) {
-              ++this._infoBox.ports;
-              this._ports[this._infoBox.ports - 1].pos = this._currentTile.pos;
-            }
           }
         }
       }

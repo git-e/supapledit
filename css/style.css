@@ -1,7 +1,20 @@
 @import "reset.css";
 @import "level-editor.css";
 
-body { font-family: "Syne Mono"; background: #333; color: #c22; }
+@font-face {
+  font-family: 'Syne Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Syne Mono'),
+       url('../font/syne-mono.woff2') format('woff2'),
+       url('../font/syne-mono.woff') format('woff');
+}
+
+body {
+  font-family: "Syne Mono", monospace;
+  background: #333;
+  color: #c22;
+}
 
 input[type=text],
 input[type=number] {

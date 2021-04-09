@@ -6,6 +6,11 @@ class LoadLevelset extends Event {
 }
 
 export default class LevelFile extends HTMLElement {
+
+  get filename() {
+    return this.querySelector('input').files[0] ? this.querySelector('input').files[0].name : 'LEVELS.DAT';
+  }
+
   constructor() {
     super();
   }
@@ -17,6 +22,9 @@ export default class LevelFile extends HTMLElement {
       }
       if (event.target.name == 'save-lst') {
         this.dispatchEvent(new Event('save-levellist', {bubbles: true}))
+      }
+      if (event.target.name == 'load-dat') {
+        this.querySelector('input').click();
       }
     });
     this.addEventListener('change', event => {

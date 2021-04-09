@@ -28,11 +28,17 @@ info-box input:invalid {
   color: red;
 }
 
-info-box input[name="levelnumber"] { position: absolute; width: 75px; bottom: 9px; left: 45px }
-info-box input[name="levelname"] { position: absolute; width: 555px; bottom: 9px; left: 189px }
+info-box input[name="levelnumber"] { position: absolute; width: 75px; bottom: 9px; left: 45px; }
+info-box input[name="levelname"] {
+  position: absolute;
+  width: 555px;
+  bottom: 9px;
+  left: 189px;
+  letter-spacing: 10px;
+  padding-left: 10px;
+}
 info-box input[name="infotrons"] {position: absolute;width: 75px;bottom: 9px;right: 72px;}
 info-box input[name="levelnumber"],
-info-box input[name="levelname"],
 info-box input[name="infotrons"],
 info-box label[title="pos"], .foo {
   letter-spacing: 4px;

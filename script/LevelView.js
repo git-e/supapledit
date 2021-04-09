@@ -11,6 +11,7 @@ export default class LevelView extends HTMLElement {
   _infoBox;
   _ports;
   _positionUpdateTimeout = null;
+  _currentTile = null;
 
   constructor() {
     super();
@@ -26,6 +27,27 @@ export default class LevelView extends HTMLElement {
     this.addEventListener('tile-enter', (event) => {
       clearTimeout(this._positionUpdateTimeout);
       this._positionUpdateTimeout = setTimeout(()=>this._infoBox.showTilePosition(event.tile.pos));
+      this._currentTile = event.tile;
+    });
+    document.body.addEventListener('keydown', (event) => {
+      if (event.target === document.body) {
+        if (event.code === "KeyV" && this._currentTile) {
+          this.querySelector('[title="misc"] input[name="viewport.x"]').value = Math.min(40, Math.max(0, (this._currentTile.pos % 60) - 9));
+          this.querySelector('[title="misc"] input[name="viewport.y"]').value = Math.min(12, Math.max(0, ((this._currentTile.pos / 60) | 0) - 6));
+        }
+        if (event.code === "KeyP") {
+          if (event.shiftKey) {
+            if ( this._infoBox.ports > 0 ) {
+              --this._infoBox.ports;
+            }
+          } else if (this._currentTile) {
+            if ( this._infoBox.ports < 10 ) {
+              ++this._infoBox.ports;
+              this._ports[this._infoBox.ports - 1].pos = this._currentTile.pos;
+            }
+          }
+        }
+      }
     });
   }
 

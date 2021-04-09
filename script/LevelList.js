@@ -35,6 +35,10 @@ export default class LevelList extends HTMLElement {
     });
   }
 
+  select(index) {
+    this.entries[index].click();
+  }
+
   loadFromBytes(bytes) {
     this.innerHTML=Array.from({length: bytes.length / 1536 | 0})
       .map((_, i) => bytes.slice(i * 1536, (i+1) * 1536))
@@ -71,7 +75,7 @@ export class LevelEntry extends HTMLElement {
     const data = parseChunk(chunk, this.number);
     this.dataset.chunk = data.chunk;
     this.dataset.number = data.number;
-    this.dataset.innerText = data.label;
+    this.innerText = data.label;
   }
 
   connectedCallback() {
