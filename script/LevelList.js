@@ -33,6 +33,9 @@ export default class LevelList extends HTMLElement {
       event.previousSelection = selected;
       event.target.setAttribute('selected', '');
     });
+    this.addEventListener('click', event => {
+      this.toggleAttribute('folded');
+    });
   }
 
   select(index) {
@@ -81,6 +84,7 @@ export class LevelEntry extends HTMLElement {
   connectedCallback() {
     this.addEventListener('click', event => {
       this.dispatchEvent(new Event('level-select', {bubbles: true}));
+      event.stopPropagation();
     });
   }
 }

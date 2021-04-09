@@ -14,14 +14,15 @@ body {
 level-editor {
   display: grid;
   white-space: nowrap;
-  grid-template-columns: auto auto auto 100fr;
-  grid-template-rows: auto auto auto auto 100fr;
+  grid-template-columns: auto auto 100fr;
+  grid-template-rows: auto auto auto 100fr;
   column-gap: 20px;
   align-items: start;
 }
 
 level-editor > level-file {
   grid-column-start: 1;
+  grid-column-end: -1;
   grid-row-start: 1;
   margin-bottom: 20px;
 }

@@ -3,6 +3,26 @@ level-list {
   flex-direction: column;
   height: calc(100vh - 90px);
   overflow-y: auto;
+  min-width: 16px;
+  padding-top: 16px;
+}
+
+level-list[folded] > level-entry {
+  display: none;
+}
+level-list[folded]::before {
+  background-image: url(../tiles/1e.png);
+}
+level-list::before {
+  content: '';
+  height: 16px;
+  width: 16px;
+  background-image: url(../tiles/1d.png);
+  background-repeat: no-repeat;
+  display: block;
+  position: absolute;
+  margin-top: -16px;
+  z-index: 1;
 }
 
 level-entry {
