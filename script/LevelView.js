@@ -32,10 +32,12 @@ export default class LevelView extends HTMLElement {
     document.body.addEventListener('keydown', (event) => {
       if (event.target === document.body) {
         if (event.code === "KeyV" && this._currentTile) {
+          event.preventDefault();
           this.querySelector('[title="misc"] input[name="viewport.x"]').value = Math.min(40, Math.max(0, (this._currentTile.pos % 60) - 9));
           this.querySelector('[title="misc"] input[name="viewport.y"]').value = Math.min(12, Math.max(0, ((this._currentTile.pos / 60) | 0) - 6));
         }
         if (event.code === "KeyP") {
+          event.preventDefault();
           if (event.shiftKey) {
             if ( this._infoBox.ports > 0 ) {
               --this._infoBox.ports;

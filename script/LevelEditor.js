@@ -56,6 +56,7 @@ export default class LevelEditor extends HTMLElement {
     document.body.addEventListener('keydown', (event) => {
       if (event.target === document.body) {
         if (event.code.startsWith("Digit")) {
+          event.preventDefault();
           if (event.shiftKey) {
             this._tileSelector.prevSet(event.code.substr(-1));
           } else {
